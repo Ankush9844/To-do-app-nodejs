@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Todo App</title>
+    <link
+      rel="stylesheet"
+      href="/static/stylesheets/style.css"
+      type="text/css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Baloo+Bhai|Candal|Chewy&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+      integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <div class="todo-container">
+      <h2>To-Do List</h2>
+      <div class="todo">
+        <!-- Form to add a new task -->
+        <form action="/" method="POST" class="todo-header">
+          <input
+            type="text"
+            name="content"
+            placeholder="Enter a new task"
+            required
+          />
+          <button type="submit" aria-label="Add Task">
+            <span class="fas fa-plus"></span>
+          </button>
+        </form>
+
+        <!-- List of tasks -->
+        <ul class="todo-list">
+          <% if (todoTasks && todoTasks.length > 0) { %> <%
+          todoTasks.forEach(details => { %>
+          <li class="todo-list-item">
+            <div class="todo-list-item-name"><%= details.content %></div>
+            <a
+              href="/edit/<%= details._id %>"
+              class="edit"
+              aria-label="Edit Task"
+            >
+              <span class="fas fa-edit"></span>
+            </a>
+            <a
+              href="/remove/<%= details._id %>"
+              class="remove"
+              aria-label="Remove Task"
+            >
+              <span class="fas fa-times"></span>
+            </a>
+          </li>
+          <% }) %> <% } else { %>
+          <li class="todo-list-item empty">
+            <div class="todo-list-item-name">
+              No tasks found. Add a new one!
+            </div>
+          </li>
+          <% } %>
+        </ul>
+      </div>
+    </div>
+  </body>
+</html>
